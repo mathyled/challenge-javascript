@@ -33,8 +33,12 @@ const {
 // < 16
 
 function exponencial(exp) {
-
+    return function (parm) {
+        return Math.pow(parm,exp)
+    }
 }
+// let sqrt = exponencial(4);
+// console.log(sqrt())
 
 // ----- Recursión -----
 
@@ -70,8 +74,71 @@ function exponencial(exp) {
 // Aclaraciones: el segundo parametro que recibe la funcion ('direccion') puede ser pasado vacio (null)
 
 function direcciones(laberinto) {
+    var letra = "";
+    for (var prop in laberinto) {
+        // Condicion de corte
+        if (typeof laberinto[prop] === "object" || laberinto[prop] === "destino") {
+            letra = letra + prop;
+            letra = letra + direcciones(laberinto[prop])
+        }
+    }
+    return letra;
+};
 
-}
+
+// let lab2 = {
+//     N: 'pared', S: 'pared', E: {
+//         N: 'pared', S: {
+//             N: 'pared', S: 'pared', E: 'pared', O: {
+//                 N: {
+//                     N: 'pared', S: 'pared', E: 'pared', O: {
+//                         N: 'pared', S: {
+//                             N: 'pared', S: 'pared', E: 'destino', O: 'pared'
+//                         }, E: 'pared', O: 'pared'
+//                     }
+//                 }, S: 'pared', E: 'pared', O: 'pared'
+//             }
+//         }, E: 'pared', O: 'pared'
+//     }, O: 'pared'
+// }
+
+// console.log(direcciones(lab2));
+
+// for ( var elem in lab1){
+//     if (typeof lab1[elem] === "object") {
+//         var letra= lab1[elem];
+//         console.log(letra)
+//     }
+//     var letra = elem
+//  console.log(letra);
+//} 
+
+
+//   var movimientos = "";
+// for (var prop in laberinto) {
+
+//     // Condicion de corte
+//      if( laberinto[prop] === "destino")
+//         return movimientos
+
+//     if (typeof laberinto[prop] === "object") {
+//         movimientos+=prop;
+//         movimientos = movimientos + direcciones(laberinto[prop])
+//     }
+// }
+
+// for (const prop in laberinto) {
+//     if(typeof laberinto[prop]=== "object"){
+//         movimientos=movimientos + direcciones(laberinto)
+//     }else{
+//         movimientos=movimientos + laberinto[prop]
+//     }    
+//     }
+
+//
+
+// console.log(direcciones(lab1));
+
 
 
 // EJERCICIO 3
@@ -86,11 +153,24 @@ function direcciones(laberinto) {
 // deepEqualArrays([0,1,2], [0,1,2]) => true
 // deepEqualArrays([0,1,2], [0,1,2,3]) => false
 // deepEqualArrays([0,1,[[0,1,2],1,2]], [0,1,[[0,1,2],1,2]]) => true
-
+//                    ↑                         ↑
 function deepEqualArrays(arr1, arr2) {
 
+if(arr1.length !== arr2.length) return false;
+
+for (let i = 0; i < arr1.length; i++) {
+  if(Array.isArray(arr1[i]) && Array.isArray(arr2[i])){
+      return deepEqualArrays(arr1[i],arr2[i])
+  }
+  if(arr1[i] === arr2[i]){
+      return true;
+  }else{
+      return false;
+  }
+}
 }
 
+//  console.log(deepEqualArrays([0,1,[[0,1,2],1,2]],[0,1,[[0,1,2],1,2]] ))
 
 
 // ----- LinkedList -----
@@ -110,7 +190,7 @@ function OrderedLinkedList() {
 // notar que Node esta implementado en el archivo DS
 
 // Y el metodo print que permite visualizar la lista:
-OrderedLinkedList.prototype.print = function(){
+OrderedLinkedList.prototype.print = function () {
     let print = 'head'
     let pointer = this.head
     while (pointer) {
@@ -138,8 +218,8 @@ OrderedLinkedList.prototype.print = function(){
 // > LL.print()
 // < 'head --> 5 --> 3 --> 1 --> null'
 //               4
-OrderedLinkedList.prototype.add = function(val){
-    
+OrderedLinkedList.prototype.add = function (val) {
+
 }
 
 
@@ -158,8 +238,8 @@ OrderedLinkedList.prototype.add = function(val){
 // > LL.removeHigher()
 // < null
 
-OrderedLinkedList.prototype.removeHigher = function(){
-    
+OrderedLinkedList.prototype.removeHigher = function () {
+
 }
 
 
@@ -178,8 +258,8 @@ OrderedLinkedList.prototype.removeHigher = function(){
 // > LL.removeHigher()
 // < null
 
-OrderedLinkedList.prototype.removeLower = function(){
-    
+OrderedLinkedList.prototype.removeLower = function () {
+
 }
 
 
@@ -211,8 +291,8 @@ OrderedLinkedList.prototype.removeLower = function(){
 // > multiCallbacks(cbs1, cbs2);
 // < ["2-1", "1-1", "1-2", "2-2"];
 
-function multiCallbacks(cbs1, cbs2){
-    
+function multiCallbacks(cbs1, cbs2) {
+
 }
 
 
@@ -230,8 +310,8 @@ function multiCallbacks(cbs1, cbs2){
 // 5   9
 // resultado:[5,8,9,32,64]
 
-BinarySearchTree.prototype.toArray = function() {
-    
+BinarySearchTree.prototype.toArray = function () {
+
 }
 
 
@@ -250,7 +330,7 @@ BinarySearchTree.prototype.toArray = function() {
 // informarse sobre algoritmos, leerlos de un pseudocodigo e implemnterlos alcanzara
 
 function primalityTest(n) {
-    
+
 }
 
 
@@ -260,7 +340,7 @@ function primalityTest(n) {
 // https://en.wikipedia.org/wiki/Quicksort
 
 function quickSort(array) {
-    
+
 }
 // QuickSort ya lo conocen solo que este 
 // ordena de mayor a menor
@@ -282,8 +362,8 @@ function quickSort(array) {
 // > reverse(95823);
 // < 32859
 
-function reverse(num){
-    
+function reverse(num) {
+
 }
 // la grandiosa resolucion de Wilson!!!
 // declaran una variable donde 
