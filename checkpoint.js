@@ -219,7 +219,28 @@ OrderedLinkedList.prototype.print = function () {
 // < 'head --> 5 --> 3 --> 1 --> null'
 //               4
 OrderedLinkedList.prototype.add = function (val) {
-
+    if (!this.head) {
+        // Hago que el head apunte al nuevo nodo
+        this.head = new Node(val);
+  
+    }
+    // Si el head si apuntara a un nodo
+    // Creo un cursor con el que recorrer la lista
+    let cursor = this.head;
+    // Mientras el cursor este apuntando a alguien
+    while (cursor.next) {
+        // Muevo el cursor al nodo apuntado
+        cursor = cursor.next;
+    }
+    // Ahora que el cursor no apunta a otro nodo
+    // Hago que el nodo del cursor apunte al nuevo nodo
+    if(cursor.value > val){
+     cursor.next = new Node(val);
+    }else{
+        var aux= this.head.next;
+        this.head=new Node(val);
+        this.head.next=aux;
+    }
 }
 
 
@@ -309,9 +330,15 @@ function multiCallbacks(cbs1, cbs2) {
 //  / \
 // 5   9
 // resultado:[5,8,9,32,64]
+//
 
-BinarySearchTree.prototype.toArray = function () {
 
+// 18 A Matias Lamela
+BinarySearchTree.prototype.toArray = function (arreglo=[]) {
+      this.depthFirstForEach(function(value){
+          arreglo.push(value)
+      })
+      return value;
 }
 
 
